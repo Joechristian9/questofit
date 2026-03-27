@@ -1,147 +1,181 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ROZ_PRO</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
     <!-- Main Menu -->
     <div id="main-menu" class="menu-screen">
-        <div class="menu-container">
-            <h1 class="game-logo">Quest of the IT Hero</h1>
-            <p class="game-subtitle">Learn Programming Through Adventure</p>
-            
-            <div class="menu-buttons">
-                <button class="menu-btn primary" onclick="showDifficultyMenu()">
-                    <span class="btn-icon">🎮</span>
-                    New Game
-                </button>
-                <button class="menu-btn secondary" id="continue-btn" onclick="showSaveManagement()">
-                    <span class="btn-icon">💾</span>
-                    Continue
-                </button>
-                <button class="menu-btn tertiary" onclick="alert('Credits: Digital Innovators Guild')">
-                    <span class="btn-icon">ℹ️</span>
-                    About
-                </button>
-            </div>
+      <div class="menu-container">
+        <h1 class="game-logo">Quest lang</h1>
+        <p class="game-subtitle">Learn Programming Through Adventure</p>
+
+        <div class="menu-buttons">
+          <button class="menu-btn primary" onclick="showDifficultyMenu()">
+            <span class="btn-icon">🎮</span>
+            New Game
+          </button>
+          <button
+            class="menu-btn secondary"
+            id="continue-btn"
+            onclick="showSaveManagement()"
+          >
+            <span class="btn-icon">💾</span>
+            Continue
+          </button>
+          <button
+            class="menu-btn tertiary"
+            onclick="alert('Credits: Digital Innovators Guild')"
+          >
+            <span class="btn-icon">ℹ️</span>
+            About
+          </button>
         </div>
+      </div>
     </div>
 
     <!-- Save Management Screen -->
-    <div id="save-management" class="menu-screen" style="display: none;">
-        <div class="menu-container">
-            <h2 class="menu-title">Load Game</h2>
-            <p class="menu-subtitle">Select a save file to continue your journey</p>
-            
-            <div id="save-slots" class="save-slots-container">
-                <!-- Save slots will be populated here -->
-            </div>
-            
-            <button class="menu-btn back-btn" onclick="showMainMenu()">
-                ← Back to Menu
-            </button>
+    <div id="save-management" class="menu-screen" style="display: none">
+      <div class="menu-container">
+        <h2 class="menu-title">Load Game</h2>
+        <p class="menu-subtitle">Select a save file to continue your journey</p>
+
+        <div id="save-slots" class="save-slots-container">
+          <!-- Save slots will be populated here -->
         </div>
+
+        <button class="menu-btn back-btn" onclick="showMainMenu()">
+          ← Back to Menu
+        </button>
+      </div>
     </div>
 
     <!-- Difficulty Selection -->
-    <div id="difficulty-menu" class="menu-screen" style="display: none;">
-        <div class="menu-container">
-            <h2 class="menu-title">Choose Your Difficulty</h2>
-            <p class="menu-subtitle">Select a challenge level that matches your programming experience</p>
-            
-            <div id="difficulty-options" class="difficulty-grid"></div>
-            
-            <button class="menu-btn back-btn" onclick="showMainMenu()">
-                ← Back to Menu
-            </button>
-        </div>
+    <div id="difficulty-menu" class="menu-screen" style="display: none">
+      <div class="menu-container">
+        <h2 class="menu-title">Choose Your Difficulty</h2>
+        <p class="menu-subtitle">
+          Select a challenge level that matches your programming experience
+        </p>
+
+        <div id="difficulty-options" class="difficulty-grid"></div>
+
+        <button class="menu-btn back-btn" onclick="showMainMenu()">
+          ← Back to Menu
+        </button>
+      </div>
     </div>
 
     <!-- Story Screen -->
-    <div id="story-screen" class="menu-screen" style="display: none;">
-        <div class="story-container">
-            <h2 id="story-title" class="story-title"></h2>
-            <div id="story-text" class="story-text"></div>
-            <button id="start-game-btn" class="menu-btn primary" onclick="startGame()" style="display: none;">
-                Begin Your Journey →
-            </button>
-        </div>
+    <div id="story-screen" class="menu-screen" style="display: none">
+      <div class="story-container">
+        <h2 id="story-title" class="story-title"></h2>
+        <div id="story-text" class="story-text"></div>
+        <button
+          id="start-game-btn"
+          class="menu-btn primary"
+          onclick="startGame()"
+          style="display: none"
+        >
+          Begin Your Journey →
+        </button>
+      </div>
     </div>
 
     <!-- Game Container -->
-    <div id="game-container" style="display: none;">
-        <div id="top-bar">
-            <div id="game-title">Quest of the IT Hero</div>
-            <div id="top-stats">
-                <span class="stat-item">🎓 Level <span id="player-level">1</span></span>
-                <span class="stat-item">⭐ XP: <span id="player-xp">0</span>/<span id="player-xp-needed">100</span></span>
-                <span class="stat-item">🏆 Score: <span id="player-score">0</span></span>
-            </div>
+    <div id="game-container" style="display: none">
+      <div id="top-bar">
+        <div id="game-title">Quest of the IT Hero</div>
+        <div id="top-stats">
+          <span class="stat-item"
+            >🎓 Level <span id="player-level">1</span></span
+          >
+          <span class="stat-item"
+            >⭐ XP: <span id="player-xp">0</span>/<span id="player-xp-needed"
+              >100</span
+            ></span
+          >
+          <span class="stat-item"
+            >🏆 Score: <span id="player-score">0</span></span
+          >
         </div>
-        
-        <canvas id="gameCanvas"></canvas>
-        
-        <div id="bottom-ui">
-            <div id="quest-panel">
-                <div class="panel-header">📋 Current Quest</div>
-                <div id="current-quest">Explore the Digital World</div>
-            </div>
-            
-            <div id="stats-panel">
-                <div class="panel-header">📊 Progress</div>
-                <div class="stat-row">
-                    <span>Missions Completed:</span>
-                    <span id="missions-completed">0</span>
-                </div>
-                <div class="stat-row">
-                    <span>Skills Learned:</span>
-                    <span id="player-skills">None yet</span>
-                </div>
-            </div>
-            
-            <div id="controls-panel">
-                <div class="panel-header">🎮 Controls</div>
-                <div class="control-item"><kbd>WASD</kbd> or <kbd>↑←↓→</kbd> Move</div>
-                <div class="control-item"><kbd>E</kbd> Interact</div>
-                <div class="control-item"><kbd>ESC</kbd> Menu</div>
-                <button class="quit-btn" onclick="quitToMenu()">
-                    <span>🚪</span> Quit to Menu
-                </button>
-                <button class="quit-btn" onclick="interactWithWorld()" style="background: linear-gradient(135deg, #3498db 0%, #2980b9 100%); border-color: #3498db; margin-top: 10px;">
-                    <span>🎯</span> Test Interact
-                </button>
-            </div>
+      </div>
+
+      <canvas id="gameCanvas"></canvas>
+
+      <div id="bottom-ui">
+        <div id="quest-panel">
+          <div class="panel-header">📋 Current Quest</div>
+          <div id="current-quest">Explore the Digital World</div>
         </div>
-        
-        <!-- Programming Puzzle Modal -->
-        <div id="puzzle-container" style="display: none;">
-            <div id="puzzle-modal" class="puzzle-modal">
-                <div class="puzzle-header">
-                    <h2 id="puzzle-title">Programming Challenge</h2>
-                    <span id="puzzle-difficulty" class="puzzle-difficulty-badge"></span>
-                </div>
-                <div class="puzzle-content">
-                    <p id="puzzle-question"></p>
-                    <div id="puzzle-options"></div>
-                    <p id="puzzle-result"></p>
-                </div>
-                <button class="puzzle-close-btn" onclick="closePuzzle()">✕ Close</button>
-            </div>
+
+        <div id="stats-panel">
+          <div class="panel-header">📊 Progress</div>
+          <div class="stat-row">
+            <span>Missions Completed:</span>
+            <span id="missions-completed">0</span>
+          </div>
+          <div class="stat-row">
+            <span>Skills Learned:</span>
+            <span id="player-skills">None yet</span>
+          </div>
         </div>
-        
-        <!-- Dialogue Box -->
-        <div id="dialogue-box" style="display: none;">
-            <p id="dialogue-speaker"></p>
-            <p id="dialogue-text"></p>
+
+        <div id="controls-panel">
+          <div class="panel-header">🎮 Controls</div>
+          <div class="control-item">
+            <kbd>WASD</kbd> or <kbd>↑←↓→</kbd> Move
+          </div>
+          <div class="control-item"><kbd>E</kbd> Interact</div>
+          <div class="control-item"><kbd>ESC</kbd> Menu</div>
+          <button class="quit-btn" onclick="quitToMenu()">
+            <span>🚪</span> Quit to Menu
+          </button>
+          <button
+            class="quit-btn"
+            onclick="interactWithWorld()"
+            style="
+              background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+              border-color: #3498db;
+              margin-top: 10px;
+            "
+          >
+            <span>🎯</span> Test Interact
+          </button>
         </div>
+      </div>
+
+      <!-- Programming Puzzle Modal -->
+      <div id="puzzle-container" style="display: none">
+        <div id="puzzle-modal" class="puzzle-modal">
+          <div class="puzzle-header">
+            <h2 id="puzzle-title">Programming Challenge</h2>
+            <span id="puzzle-difficulty" class="puzzle-difficulty-badge"></span>
+          </div>
+          <div class="puzzle-content">
+            <p id="puzzle-question"></p>
+            <div id="puzzle-options"></div>
+            <p id="puzzle-result"></p>
+          </div>
+          <button class="puzzle-close-btn" onclick="closePuzzle()">
+            ✕ Close
+          </button>
+        </div>
+      </div>
+
+      <!-- Dialogue Box -->
+      <div id="dialogue-box" style="display: none">
+        <p id="dialogue-speaker"></p>
+        <p id="dialogue-text"></p>
+      </div>
     </div>
-    
+
     <script src="menu.js"></script>
     <script src="map.js"></script>
     <script src="missions.js"></script>
     <script src="game.js"></script>
-</body>
+  </body>
 </html>
