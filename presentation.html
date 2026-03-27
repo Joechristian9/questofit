@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quest of the IT Hero - Presentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .slide-container {
+            background: white;
+            width: 100%;
+            max-width: 1200px;
+            aspect-ratio: 16/9;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slide-content {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #1e3c72 100%);
+        }
+
+        /* Animated background elements */
+        .bg-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 50px, rgba(255,255,255,0.1) 50px, rgba(255,255,255,0.1) 51px),
+                repeating-linear-gradient(90deg, transparent, transparent 50px, rgba(255,255,255,0.1) 50px, rgba(255,255,255,0.1) 51px);
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .code-snippets {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            opacity: 0.15;
+        }
+
+        .code-snippet {
+            position: absolute;
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            animation: float 15s infinite;
+        }
+
+        .code-snippet:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; }
+        .code-snippet:nth-child(2) { top: 30%; right: 10%; animation-delay: 2s; }
+        .code-snippet:nth-child(3) { bottom: 20%; left: 15%; animation-delay: 4s; }
+        .code-snippet:nth-child(4) { top: 60%; right: 20%; animation-delay: 6s; }
+        .code-snippet:nth-child(5) { bottom: 10%; right: 5%; animation-delay: 8s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); opacity: 0.15; }
+            50% { transform: translateY(-20px); opacity: 0.3; }
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 60px 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .game-title {
+            font-size: 64px;
+            font-weight: bold;
+            color: #00ff88;
+            text-shadow: 0 0 20px rgba(0, 255, 136, 0.5), 0 4px 8px rgba(0, 0, 0, 0.3);
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 20px rgba(0, 255, 136, 0.5), 0 4px 8px rgba(0, 0, 0, 0.3); }
+            to { text-shadow: 0 0 30px rgba(0, 255, 136, 0.8), 0 4px 12px rgba(0, 0, 0, 0.4); }
+        }
+
+        .team-name {
+            font-size: 28px;
+            color: #ffd700;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .genre-tags {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 8px 20px;
+            border-radius: 20px;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            padding: 20px 60px;
+            gap: 40px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .left-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .intro-box {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 25px;
+            color: white;
+            line-height: 1.8;
+            font-size: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .intro-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #00ff88;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .intro-title::before {
+            content: "💡";
+            font-size: 24px;
+        }
+
+        .right-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .feature-box {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 20px;
+            color: white;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ffd700;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            padding: 6px 0;
+            padding-left: 25px;
+            position: relative;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .feature-list li::before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #00ff88;
+            font-weight: bold;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .pixel-hero {
+            position: absolute;
+            bottom: 30px;
+            right: 60px;
+            width: 80px;
+            height: 80px;
+            background: #00ff88;
+            border: 3px solid white;
+            box-shadow: 0 8px 20px rgba(0, 255, 136, 0.4);
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .pixel-hero::after {
+            content: "🎮";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 40px;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+            .slide-container {
+                max-width: 100%;
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="slide-content">
+            <!-- Animated Background -->
+            <div class="bg-pattern"></div>
+            <div class="code-snippets">
+                <div class="code-snippet">if (learn) { succeed(); }</div>
+                <div class="code-snippet">function debug() { ... }</div>
+                <div class="code-snippet">while (exploring) { solve(); }</div>
+                <div class="code-snippet">class ITHero { ... }</div>
+                <div class="code-snippet">const quest = new Adventure();</div>
+            </div>
+
+            <!-- Header -->
+            <div class="header">
+                <h1 class="game-title">Quest of the IT Hero</h1>
+                <h2 class="team-name">Digital Innovators Guild</h2>
+                <div class="genre-tags">
+                    <span class="tag">2D Adventure RPG</span>
+                    <span class="tag">Educational</span>
+                    <span class="tag">Puzzle & Problem-Solving</span>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="main-content">
+                <div class="left-section">
+                    <div class="intro-box">
+                        <div class="intro-title">About Our Game</div>
+                        <p>
+                            We are IT students passionate about creating meaningful and creative digital experiences. 
+                            <strong>Quest of the IT Hero</strong> is an educational 2D RPG where players learn programming 
+                            and IT concepts through interactive missions instead of combat. Players explore a digital world, 
+                            travel to designated areas, and complete tasks such as answering programming questions, 
+                            identifying correct syntax, and debugging code. The game transforms learning IT fundamentals 
+                            into a fun, guided adventure that improves problem-solving and logical thinking skills.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="right-section">
+                    <div class="feature-box">
+                        <div class="feature-title">🎯 Core Gameplay</div>
+                        <ul class="feature-list">
+                            <li>No attack or fighting mechanics</li>
+                            <li>Mission-based progression system</li>
+                            <li>Explore villages, labs, terminals, and servers</li>
+                            <li>Programming syntax questions</li>
+                            <li>Debugging challenges</li>
+                            <li>Logic and IT-related quizzes</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-box">
+                        <div class="feature-title">🎨 Visual Style</div>
+                        <ul class="feature-list">
+                            <li>Pixel-art / retro 2D RPG aesthetic</li>
+                            <li>Calm, intelligent, and adventurous atmosphere</li>
+                            <li>Focus on learning and exploration</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pixel Hero Icon -->
+            <div class="pixel-hero"></div>
+
+            <!-- Footer -->
+            <div class="footer">
+                An Educational Gaming Experience | Transforming IT Learning into Adventure
+            </div>
+        </div>
+    </div>
+</body>
+</html>
