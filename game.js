@@ -105,6 +105,100 @@ class MissionPoint {
     }
 }
 
+// Joystick control handler
+let joystickActive = false;
+let joystickCenter = { x: 0, y: 0 };
+const joystickMaxDistance = 40; // Maximum distance the stick can move from center
+
+function initJoystick() {
+    const joystickContainer = document.getElementById('joystick-container');
+    const joystickStick = document.getElementById('joystick-stick');
+    
+    if (!joystickContainer || !joystickStick) return;
+    
+    function handleJoystickStart(e) {
+        e.preventDefault();
+        joystickActive = true;
+        
+        const rect = joystickContainer.getBoundingClientRect();
+        joystickCenter.x = rect.left + rect.width / 2;
+        joystickCenter.y = rect.top + rect.height / 2;
+    }
+    
+    function handleJoystickMove(e) {
+        if (!joystickActive) return;
+        e.preventDefault();
+        
+        const touch = e.touches ? e.touches[0] : e;
+        const deltaX = touch.clientX - joystickCenter.x;
+        const deltaY = touch.clientY - joystickCenter.y;
+        
+        // Calculate distance and angle
+        const distance = Math.min(Math.sqrt(deltaX * deltaX + deltaY * deltaY), joystickMaxDistance);
+        const angle = Math.atan2(deltaY, deltaX);
+        
+        // Update stick position
+        const stickX = Math.cos(angle) * distance;
+        const stickY = Math.sin(angle) * distance;
+        joystickStick.style.transform = `translate(calc(-50% + ${stickX}px), calc(-50% + ${stickY}px))`;
+        
+        // Update movement keys based on joystick position
+        const threshold = 15; // Minimum distance to register movement
+        
+        if (distance > threshold) {
+            // Determine primary direction
+            const absX = Math.abs(deltaX);
+            const absY = Math.abs(deltaY);
+            
+            // Reset all keys
+            gameState.keys['w'] = false;
+            gameState.keys['s'] = false;
+            gameState.keys['a'] = false;
+            gameState.keys['d'] = false;
+            
+            // Set keys based on direction
+            if (absY > absX * 0.5) {
+                if (deltaY < 0) gameState.keys['w'] = true; // Up
+                else gameState.keys['s'] = true; // Down
+            }
+            if (absX > absY * 0.5) {
+                if (deltaX < 0) gameState.keys['a'] = true; // Left
+                else gameState.keys['d'] = true; // Right
+            }
+        } else {
+            // Reset all keys when joystick is near center
+            gameState.keys['w'] = false;
+            gameState.keys['s'] = false;
+            gameState.keys['a'] = false;
+            gameState.keys['d'] = false;
+        }
+    }
+    
+    function handleJoystickEnd(e) {
+        e.preventDefault();
+        joystickActive = false;
+        
+        // Reset stick position
+        joystickStick.style.transform = 'translate(-50%, -50%)';
+        
+        // Reset all movement keys
+        gameState.keys['w'] = false;
+        gameState.keys['s'] = false;
+        gameState.keys['a'] = false;
+        gameState.keys['d'] = false;
+    }
+    
+    // Touch events
+    joystickContainer.addEventListener('touchstart', handleJoystickStart, { passive: false });
+    document.addEventListener('touchmove', handleJoystickMove, { passive: false });
+    document.addEventListener('touchend', handleJoystickEnd, { passive: false });
+    
+    // Mouse events (for testing on desktop)
+    joystickContainer.addEventListener('mousedown', handleJoystickStart);
+    document.addEventListener('mousemove', handleJoystickMove);
+    document.addEventListener('mouseup', handleJoystickEnd);
+}
+
 // Initialize game
 let gameInitialized = false;
 
@@ -169,6 +263,9 @@ function init() {
         console.log('Event listeners set up successfully');
     }
     
+    // Initialize joystick controls
+    initJoystick();
+    
     // Start game loop (stop old one first if exists)
     if (gameState.gameLoop) {
         clearInterval(gameState.gameLoop);
@@ -181,6 +278,27 @@ function init() {
     
     console.log('Init complete');
 }
+
+// Handle window resize
+function handleResize() {
+    if (gameState.gameLoop) {
+        const topBarHeight = 70;
+        const bottomUIHeight = 150;
+        const mobileControlsHeight = window.innerWidth <= 768 ? 200 : 0;
+        const availableHeight = window.innerHeight - topBarHeight - bottomUIHeight - mobileControlsHeight;
+        
+        canvas.width = window.innerWidth;
+        canvas.height = Math.max(400, availableHeight);
+        
+        console.log('Canvas resized:', canvas.width, 'x', canvas.height);
+    }
+}
+
+// Add resize listener
+window.addEventListener('resize', handleResize);
+window.addEventListener('orientationchange', () => {
+    setTimeout(handleResize, 100);
+});
 
 function interactWithWorld() {
     const player = gameState.player;

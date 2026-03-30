@@ -1,1 +1,1 @@
-start chrome "file:///C:/xampp/htdocs/questofit/index.html"
+start chrome "file:///C:/Users/joech/OneDrive/Documents/questofit/index.html"

@@ -562,16 +562,20 @@ kbd {
     justify-content: center;
     align-items: center;
     z-index: 2000;
+    overflow-y: auto;
+    padding: 20px;
 }
 
 .menu-container {
     text-align: center;
+    width: 100%;
     max-width: 800px;
     padding: 40px;
     background: rgba(0, 0, 0, 0.7);
     border-radius: 20px;
     border: 3px solid #00ff88;
     box-shadow: 0 0 40px rgba(0, 255, 136, 0.3);
+    margin: auto;
 }
 
 .game-logo {
@@ -695,16 +699,21 @@ kbd {
     grid-template-columns: repeat(2, 1fr);
     gap: 25px;
     margin: 30px 0;
+    width: 100%;
 }
 
 .difficulty-card {
     background: rgba(0, 0, 0, 0.6);
     border: 3px solid rgba(0, 255, 136, 0.4);
     border-radius: 15px;
-    padding: 30px;
+    padding: 30px 20px;
     cursor: pointer;
     transition: all 0.3s;
     text-align: center;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .difficulty-card:hover {
@@ -734,6 +743,10 @@ kbd {
     line-height: 1.8;
     margin-bottom: 20px;
     font-weight: 500;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .difficulty-stats {
@@ -816,6 +829,131 @@ kbd {
     
     .menu-container {
         padding: 30px 20px;
+    }
+}
+
+/* Tablet menu adjustments */
+@media (max-width: 991px) and (min-width: 769px) {
+    .menu-container {
+        max-width: 90%;
+        padding: 35px 25px;
+    }
+    
+    .game-logo {
+        font-size: 48px;
+    }
+    
+    .game-subtitle, .menu-subtitle {
+        font-size: 18px;
+    }
+    
+    .menu-btn {
+        font-size: 20px;
+        padding: 18px 35px;
+    }
+    
+    .difficulty-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+    
+    .difficulty-card {
+        padding: 25px 15px;
+        min-height: 260px;
+    }
+    
+    .difficulty-icon {
+        font-size: 50px;
+    }
+    
+    .difficulty-card h3 {
+        font-size: 26px;
+    }
+    
+    .difficulty-card p {
+        font-size: 15px;
+    }
+}
+
+/* Laptop menu adjustments */
+@media (max-width: 1199px) and (min-width: 992px) {
+    .menu-container {
+        max-width: 85%;
+    }
+    
+    .game-logo {
+        font-size: 52px;
+    }
+    
+    .difficulty-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .difficulty-card {
+        min-height: 270px;
+    }
+}
+
+/* Large desktop menu */
+@media (min-width: 1921px) {
+    .menu-container {
+        max-width: 1000px;
+        padding: 50px;
+    }
+    
+    .game-logo {
+        font-size: 64px;
+    }
+    
+    .game-subtitle, .menu-subtitle {
+        font-size: 24px;
+    }
+    
+    .menu-btn {
+        font-size: 24px;
+        padding: 22px 45px;
+    }
+    
+    .btn-icon {
+        font-size: 32px;
+    }
+    
+    .difficulty-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+    }
+    
+    .difficulty-card {
+        padding: 35px 25px;
+        min-height: 320px;
+    }
+    
+    .difficulty-icon {
+        font-size: 64px;
+    }
+    
+    .difficulty-card h3 {
+        font-size: 32px;
+    }
+    
+    .difficulty-card p {
+        font-size: 18px;
+    }
+    
+    .difficulty-stats span {
+        font-size: 16px;
+    }
+}
+
+/* Zoom level adjustments */
+@media (min-width: 769px) {
+    .menu-screen {
+        padding: 40px 20px;
+    }
+    
+    .menu-container {
+        max-height: 90vh;
+        overflow-y: auto;
     }
 }
 
@@ -946,4 +1084,778 @@ kbd {
 
 .save-action-btn span {
     font-size: 16px;
+}
+
+/* Mobile Controls */
+.mobile-controls {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    padding: 15px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Joystick Container */
+.joystick-container {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin-left: 20px;
+    touch-action: none;
+    user-select: none;
+}
+
+.joystick-base {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, rgba(52, 152, 219, 0.3) 0%, rgba(41, 128, 185, 0.5) 100%);
+    border: 4px solid rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    box-shadow: 
+        inset 0 0 20px rgba(0, 0, 0, 0.5),
+        0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.joystick-stick {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    border: 4px solid #ffffff;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 
+        0 4px 15px rgba(0, 0, 0, 0.5),
+        inset 0 -2px 8px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: box-shadow 0.1s;
+}
+
+.joystick-stick:active {
+    box-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.5),
+        inset 0 -2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    margin-right: 20px;
+}
+
+.action-btn {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, #00ff88 0%, #00cc6a 100%);
+    border: 3px solid #ffffff;
+    border-radius: 50%;
+    color: #000000;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.action-btn span {
+    font-size: 10px;
+    margin-top: 2px;
+}
+
+.action-btn:active {
+    transform: scale(0.9);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.menu-btn {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+    color: #ffffff;
+}
+
+/* Responsive Design - All Screen Sizes */
+
+/* Large Desktop (> 1920px) */
+@media (min-width: 1921px) {
+    #game-container {
+        max-width: 1920px;
+        margin: 0 auto;
+    }
+    
+    #game-title {
+        font-size: 32px;
+    }
+    
+    .stat-item {
+        font-size: 18px;
+        padding: 10px 20px;
+    }
+    
+    .panel-header {
+        font-size: 18px;
+    }
+    
+    #current-quest, .stat-row {
+        font-size: 16px;
+    }
+}
+
+/* Desktop (1200px - 1920px) - Default styles apply */
+
+/* Laptop/Small Desktop (992px - 1199px) */
+@media (max-width: 1199px) and (min-width: 992px) {
+    #game-title {
+        font-size: 24px;
+    }
+    
+    .stat-item {
+        font-size: 14px;
+        padding: 6px 14px;
+    }
+    
+    #bottom-ui {
+        grid-template-columns: 1.5fr 1fr 1fr;
+        gap: 15px;
+        padding: 15px 20px;
+    }
+    
+    .panel-header {
+        font-size: 15px;
+    }
+    
+    #current-quest {
+        font-size: 14px;
+    }
+    
+    .stat-row {
+        font-size: 13px;
+    }
+    
+    .control-item {
+        font-size: 13px;
+    }
+    
+    kbd {
+        font-size: 12px;
+        padding: 2px 6px;
+    }
+    
+    .quit-btn {
+        padding: 10px 16px;
+        font-size: 14px;
+    }
+}
+
+/* Tablet Landscape (769px - 991px) */
+@media (max-width: 991px) and (min-width: 769px) {
+    #top-bar {
+        padding: 10px 15px;
+    }
+    
+    #game-title {
+        font-size: 20px;
+    }
+    
+    #top-stats {
+        gap: 12px;
+    }
+    
+    .stat-item {
+        font-size: 13px;
+        padding: 5px 12px;
+    }
+    
+    #bottom-ui {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        padding: 12px 15px;
+    }
+    
+    #controls-panel {
+        display: none;
+    }
+    
+    .panel-header {
+        font-size: 14px;
+    }
+    
+    #current-quest {
+        font-size: 13px;
+    }
+    
+    .stat-row {
+        font-size: 12px;
+    }
+    
+    /* Show mobile controls on tablets */
+    .mobile-controls {
+        display: flex !important;
+        height: 180px;
+    }
+    
+    .joystick-container {
+        width: 140px;
+        height: 140px;
+    }
+    
+    .joystick-base {
+        width: 140px;
+        height: 140px;
+    }
+    
+    .joystick-stick {
+        width: 65px;
+        height: 65px;
+    }
+    
+    .action-btn {
+        width: 65px;
+        height: 65px;
+        font-size: 18px;
+    }
+    
+    #gameCanvas {
+        max-height: calc(100vh - 60px - 120px - 180px);
+    }
+}
+
+/* Tablet Portrait & Large Mobile (481px - 768px) */
+@media (max-width: 768px) and (min-width: 481px) {
+    .mobile-controls {
+        height: 190px;
+    }
+    
+    .joystick-container {
+        width: 140px;
+        height: 140px;
+        margin-left: 15px;
+    }
+    
+    .joystick-base {
+        width: 140px;
+        height: 140px;
+    }
+    
+    .joystick-stick {
+        width: 65px;
+        height: 65px;
+    }
+    
+    .action-buttons {
+        gap: 12px;
+        margin-right: 15px;
+    }
+    
+    .action-btn {
+        width: 65px;
+        height: 65px;
+        font-size: 18px;
+    }
+    
+    .action-btn span {
+        font-size: 10px;
+    }
+    
+    #bottom-ui {
+        height: 110px;
+    }
+    
+    #gameCanvas {
+        max-height: calc(100vh - 50px - 110px - 190px);
+    }
+}
+
+/* Mobile Responsive Design */
+@media (max-width: 768px) {
+    /* Show mobile controls */
+    .mobile-controls {
+        display: flex !important;
+    }
+    
+    /* Full screen game container */
+    body {
+        overflow: hidden;
+    }
+    
+    /* Adjust game container */
+    #game-container {
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    /* Top bar responsive */
+    #top-bar {
+        padding: 8px 10px;
+        flex-wrap: nowrap;
+        min-height: 50px;
+        flex-shrink: 0;
+    }
+    
+    #game-title {
+        font-size: 16px;
+        white-space: nowrap;
+    }
+    
+    #top-stats {
+        gap: 8px;
+        flex-wrap: nowrap;
+    }
+    
+    .stat-item {
+        font-size: 11px;
+        padding: 4px 8px;
+        white-space: nowrap;
+    }
+    
+    /* Canvas takes remaining space */
+    #gameCanvas {
+        flex: 1;
+        width: 100% !important;
+        height: auto !important;
+        max-height: calc(100vh - 50px - 120px - 200px);
+        object-fit: contain;
+    }
+    
+    /* Compact bottom UI */
+    #bottom-ui {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        padding: 8px;
+        font-size: 11px;
+        flex-shrink: 0;
+        height: 120px;
+        overflow: hidden;
+    }
+    
+    /* Hide desktop controls panel on mobile */
+    #controls-panel {
+        display: none !important;
+    }
+    
+    #quest-panel, #stats-panel {
+        padding: 6px;
+        min-height: 0;
+    }
+    
+    .panel-header {
+        font-size: 12px;
+        margin-bottom: 4px;
+        padding-bottom: 4px;
+    }
+    
+    #current-quest {
+        font-size: 11px;
+        line-height: 1.3;
+    }
+    
+    .stat-row {
+        font-size: 10px;
+        padding: 3px 0;
+    }
+    
+    /* Mobile controls fixed at bottom */
+    .mobile-controls {
+        height: 200px;
+        flex-shrink: 0;
+    }
+    
+    /* Adjust puzzle modal for mobile */
+    #puzzle-container {
+        padding: 10px;
+    }
+    
+    .puzzle-modal {
+        width: 95%;
+        max-width: 95%;
+        margin: 10px 0;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+    
+    .puzzle-modal.monitor-style::before,
+    .puzzle-modal.monitor-style::after {
+        display: none;
+    }
+    
+    .puzzle-modal.monitor-style .puzzle-header,
+    .puzzle-modal.paper-style .puzzle-header {
+        padding: 12px 45px 12px 12px;
+    }
+    
+    .puzzle-header h2 {
+        font-size: 16px;
+    }
+    
+    .puzzle-difficulty-badge {
+        font-size: 10px;
+        padding: 4px 8px;
+    }
+    
+    .puzzle-modal.monitor-style .puzzle-content,
+    .puzzle-modal.paper-style .puzzle-content {
+        padding: 15px;
+        min-height: 150px;
+    }
+    
+    #puzzle-question {
+        font-size: 13px;
+        padding: 12px;
+        margin-bottom: 15px;
+    }
+    
+    .puzzle-option {
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+    
+    .puzzle-close-btn {
+        top: 8px;
+        right: 8px;
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+    
+    /* Adjust dialogue box for mobile */
+    #dialogue-box {
+        min-width: 85%;
+        max-width: 85%;
+        bottom: 210px;
+        padding: 12px 15px;
+    }
+    
+    #dialogue-speaker {
+        font-size: 13px;
+        margin-bottom: 8px;
+    }
+    
+    #dialogue-text {
+        font-size: 12px;
+        line-height: 1.5;
+    }
+    
+    /* Menu screens mobile optimization */
+    .menu-screen {
+        padding: 10px;
+    }
+    
+    .menu-container {
+        padding: 20px 15px;
+        max-width: 95%;
+        max-height: 90vh;
+        overflow-y: auto;
+        width: 95%;
+    }
+    
+    .game-logo {
+        font-size: 28px;
+        margin-bottom: 8px;
+    }
+    
+    .game-subtitle, .menu-subtitle {
+        font-size: 13px;
+        margin-bottom: 20px;
+    }
+    
+    .menu-title {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+    
+    .menu-buttons {
+        gap: 12px;
+        margin-top: 20px;
+    }
+    
+    .menu-btn {
+        font-size: 15px;
+        padding: 12px 20px;
+    }
+    
+    .btn-icon {
+        font-size: 20px;
+    }
+    
+    .difficulty-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin: 20px 0;
+    }
+    
+    .difficulty-card {
+        padding: 15px;
+        min-height: auto;
+    }
+    
+    .difficulty-icon {
+        font-size: 36px;
+        margin-bottom: 10px;
+    }
+    
+    .difficulty-card h3 {
+        font-size: 20px;
+        margin-bottom: 8px;
+    }
+    
+    .difficulty-card p {
+        font-size: 13px;
+        line-height: 1.5;
+        margin-bottom: 12px;
+    }
+    
+    .difficulty-stats {
+        margin-top: 12px;
+        padding-top: 12px;
+    }
+    
+    .difficulty-stats span {
+        font-size: 12px;
+    }
+    
+    .story-container {
+        padding: 25px 15px;
+        max-height: 85vh;
+        overflow-y: auto;
+        width: 95%;
+    }
+    
+    .story-title {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+    
+    .story-text {
+        font-size: 15px;
+        line-height: 1.8;
+        margin-bottom: 25px;
+    }
+    
+    .story-text p {
+        margin: 15px 0;
+    }
+    
+    /* Save management mobile */
+    .save-slots-container {
+        max-height: 60vh;
+    }
+    
+    .save-slot {
+        padding: 12px;
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+    }
+    
+    .save-slot-icon {
+        font-size: 32px;
+        min-width: auto;
+    }
+    
+    .save-slot-info h3 {
+        font-size: 17px;
+        margin-bottom: 6px;
+    }
+    
+    .save-slot-info p {
+        font-size: 12px;
+        margin: 3px 0;
+    }
+    
+    .save-date {
+        font-size: 11px !important;
+    }
+    
+    .save-slot-actions {
+        flex-direction: row;
+        width: 100%;
+        margin-top: 8px;
+        gap: 8px;
+    }
+    
+    .save-action-btn {
+        flex: 1;
+        min-width: auto;
+        padding: 8px 15px;
+        font-size: 13px;
+    }
+    
+    .save-action-btn span {
+        font-size: 14px;
+    }
+    
+    .back-btn {
+        padding: 10px 20px;
+        font-size: 14px;
+        margin-top: 15px;
+    }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+    #top-bar {
+        padding: 6px 8px;
+        min-height: 45px;
+    }
+    
+    #game-title {
+        font-size: 14px;
+    }
+    
+    .stat-item {
+        font-size: 10px;
+        padding: 3px 6px;
+    }
+    
+    #bottom-ui {
+        height: 100px;
+        padding: 6px;
+        gap: 6px;
+    }
+    
+    .panel-header {
+        font-size: 11px;
+    }
+    
+    #current-quest, .stat-row {
+        font-size: 10px;
+    }
+    
+    #gameCanvas {
+        max-height: calc(100vh - 45px - 100px - 180px);
+    }
+    
+    .mobile-controls {
+        height: 180px;
+        padding: 10px;
+    }
+    
+    .joystick-container {
+        width: 130px;
+        height: 130px;
+        margin-left: 10px;
+    }
+    
+    .joystick-base {
+        width: 130px;
+        height: 130px;
+    }
+    
+    .joystick-stick {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .action-buttons {
+        gap: 10px;
+        margin-right: 10px;
+    }
+    
+    .action-btn {
+        width: 60px;
+        height: 60px;
+        font-size: 16px;
+    }
+    
+    .action-btn span {
+        font-size: 9px;
+    }
+}
+
+/* Landscape mode optimization */
+@media (max-width: 768px) and (orientation: landscape) {
+    #top-bar {
+        min-height: 40px;
+        padding: 5px 8px;
+    }
+    
+    #game-title {
+        font-size: 14px;
+    }
+    
+    .stat-item {
+        font-size: 10px;
+        padding: 3px 6px;
+    }
+    
+    #bottom-ui {
+        display: none !important;
+    }
+    
+    #gameCanvas {
+        max-height: calc(100vh - 40px - 140px) !important;
+    }
+    
+    .mobile-controls {
+        height: 140px;
+        padding: 8px;
+    }
+    
+    .joystick-container {
+        width: 110px;
+        height: 110px;
+        margin-left: 10px;
+    }
+    
+    .joystick-base {
+        width: 110px;
+        height: 110px;
+    }
+    
+    .joystick-stick {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .action-buttons {
+        gap: 8px;
+        margin-right: 10px;
+    }
+    
+    .action-btn {
+        width: 55px;
+        height: 55px;
+        font-size: 16px;
+    }
+    
+    .action-btn span {
+        font-size: 8px;
+    }
+    
+    .puzzle-modal {
+        max-height: 85vh;
+    }
+    
+    #dialogue-box {
+        bottom: 150px;
+    }
+}
+
+/* Prevent text selection on mobile */
+body {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Prevent zoom on mobile */
+input, select, textarea {
+    font-size: 16px !important;
 }

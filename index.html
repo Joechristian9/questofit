@@ -2,8 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ROZ_PRO</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <title>Quest of the IT Hero</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -170,6 +172,19 @@
       <div id="dialogue-box" style="display: none">
         <p id="dialogue-speaker"></p>
         <p id="dialogue-text"></p>
+      </div>
+      
+      <!-- Mobile Controls -->
+      <div id="mobile-controls" class="mobile-controls">
+        <div class="joystick-container" id="joystick-container">
+          <div class="joystick-base">
+            <div class="joystick-stick" id="joystick-stick"></div>
+          </div>
+        </div>
+        <div class="action-buttons">
+          <button class="action-btn interact-btn" ontouchstart="interactWithWorld()" onclick="interactWithWorld()">E<br><span>Interact</span></button>
+          <button class="action-btn menu-btn" ontouchstart="quitToMenu()" onclick="quitToMenu()">⚙️<br><span>Menu</span></button>
+        </div>
       </div>
     </div>
 
